@@ -21,7 +21,11 @@ Desarrollar un modelo predictivo que permita determinar si los bebés nacerán a
 
 ## 🧪 2. Análisis individual en Python
 
-Este segundo proyecto fue desarrollado completamente por mí, reutilizando la misma base de datos del proyecto anterior. El análisis se presenta en un archivo `Markdown`, desarrollado tanto en **Visual Studio Code** como en **Google Colab**, para facilitar su presentación y ejecución en línea(https://colab.research.google.com/drive/15gwUY97_CuMljUHRSF_ChBq4XtnCXcMR?usp=sharing).
+Este segundo proyecto fue desarrollado completamente por mí, reutilizando la misma base de datos del proyecto anterior. El análisis se presenta en un archivo `Markdown`, desarrollado tanto en **Visual Studio Code** como en **Google Colab**, para facilitar su presentación y ejecución en línea.
+
+🔗 **Abrir directamente en Google Colab:**
+
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15gwUY97_CuMljUHRSF_ChBq4XtnCXcMR?usp=sharing)
 
 🛠️ **Herramientas utilizadas:**
 - Python (Pandas, Matplotlib, Scikit-learn)
@@ -33,7 +37,6 @@ Este segundo proyecto fue desarrollado completamente por mí, reutilizando la mi
 - Carpetas con scripts de apoyo
 - Código comentado y ordenado por secciones
 
----
 
 ## 📚 Otros recursos
 
