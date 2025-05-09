@@ -49,4 +49,4 @@ En esta carpeta adicional se incluyen diversos scripts desarrollados durante la 
 
 📌 **Nota final:**  
 Este portafolio seguirá creciendo con el tiempo. ¡Gracias por tu visita!  
-Puedes contactarme o ver más de mi trabajo aquí: [🔗 GitHub Profile](https://github.com/tuusuario)
+
