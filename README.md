@@ -6,7 +6,7 @@ Bienvenido(a) a mi portafolio de trabajo. Aquí encontrarás vínculos, archivos
 
 ## 📁 1. DREAM-metadata-analysis
 
-Este proyecto fue elaborado como parte de mi servicio social, en colaboración con mi compañero **Martin Rule**. El objetivo fue analizar un archivo de Excel (adjunto en el repositorio) correspondiente a un estudio en Estados Unidos sobre nacimientos.
+Este proyecto fue elaborado como parte de mi servicio social, en colaboración con mi compañero **Martin Rule**(https://github.com/martinruhle/DREAM-metadata-analysis). El objetivo fue analizar un archivo de Excel (adjunto en el repositorio) correspondiente a un estudio en Estados Unidos sobre nacimientos.
 
 🔍 **Objetivo principal:**  
 Desarrollar un modelo predictivo que permita determinar si los bebés nacerán a término o pretérmino, a partir de los datos proporcionados.
