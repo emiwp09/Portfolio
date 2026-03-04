@@ -1,0 +1,299 @@
+%%writefile app.py
+import os
+import re
+from datetime import datetime
+from urllib.parse import urlparse
+
+import numpy as np
+import pandas as pd
+import streamlit as st
+
+st.set_page_config(page_title="SalesActivator – MICE (US)", layout="wide")
+
+# -----------------------------
+# Helpers
+# -----------------------------
+def _clean_text(x) -> str:
+    if pd.isna(x):
+        return ""
+    return str(x).strip()
+
+def extract_domain(website_or_name: str) -> str:
+    """
+    1) Si viene website: saca netloc (dominio) de http/https con o sin www y paths.
+    2) Si no hay website, normaliza el nombre de empresa -> slug + '.com'
+    """
+    s = _clean_text(website_or_name)
+    if not s:
+        return ""
+    # Si parece URL, parsea
+    if s.startswith(("http://", "https://")) or "." in s:
+        try:
+            # Añade esquema si falta
+            url = s if "://" in s else f"https://{s}"
+            netloc = urlparse(url).netloc.lower()
+            netloc = netloc.replace("www.", "")
+            # Si quedó vacío (raro), intenta fallback
+            if not netloc:
+                raise ValueError("empty netloc")
+            # Quita puertos si existieran
+            netloc = netloc.split(":")[0]
+            # Validación muy básica de dominio
+            if "." in netloc and not netloc.endswith("."):
+                return netloc
+        except Exception:
+            pass
+    # Fallback: normaliza a slug + '.com'
+    base = re.sub(r"[^a-zA-Z0-9]+", "-", s.lower()).strip("-")
+    base = base if base else "example"
+    return base + ".com"
+
+def normalize_domain_from_company(name: str) -> str:
+    base = re.sub(r"[^a-zA-Z0-9]+", "-", _clean_text(name).lower()).strip("-")
+    return (base if base else "example") + ".com"
+
+SEGMENT_BONUS = {
+    "Resort": 15,
+    "Hotel Chain (Upscale)": 20,
+    "Boutique Hotel": 10,
+    "Convention Center": 25,
+    "Conference Center": 18,
+    "Event Planner/Agency": 12,
+    "Incentives Agency": 12,
+    "Lodge": 8,
+}
+STATE_BONUS = {"CA", "NY", "FL", "MA", "IL", "TX"}
+
+def compute_score(series_segment: pd.Series, series_state: pd.Series) -> pd.Series:
+    base = 50
+    seg_pts = series_segment.map(SEGMENT_BONUS).fillna(0).astype(int)
+    state_pts = series_state.isin(STATE_BONUS).astype(int) * 8
+    score = base + seg_pts + state_pts
+    return np.clip(score, 0, 100).astype(int)
+
+def guess_contacts_row(dom: str):
+    dom = dom or "example.com"
+    return [
+        {"full_name": "Alex Carter", "role": "Director of Sales", "email": f"alex.carter@{dom}"},
+        {"full_name": "Jordan Lee", "role": "Events Manager", "email": f"jordan.lee@{dom}"},
+    ]
+
+def outreach_sequence(company_name, contact_name, segment):
+    return [
+        {
+            "step": 1,
+            "channel": "Email",
+            "subject": f"Offsites/Grupos – ¿Encaja {company_name} con Paradero?",
+            "body": (
+                f"Hola {contact_name},\\n\\n"
+                f"Soy Emiliano. Trabajo con Paradero para diseñar experiencias MICE en México. "
+                f"Vi que {company_name} opera en el segmento '{segment}' y pensé en propuestas para sus clientes corporativos "
+                f"(retreats, incentivos, board meetings).\\n\\n"
+                f"¿Te interesa una llamada de 15 min para explorar fechas, tarifas corporativas y beneficios?\\n\\n"
+                f"Saludos,\\nEmiliano"
+            ),
+        },
+        {
+            "step": 2,
+            "channel": "Email (follow-up)",
+            "subject": "¿Te viene bien esta semana o la próxima?",
+            "body": (
+                f"Hola {contact_name},\\n\\n"
+                f"Retomando mi nota anterior sobre opciones MICE en Paradero. "
+                f"Puedo compartir un par de itinerarios de ejemplo (3d/2n) y políticas para grupos. "
+                f"¿Agenda abierta esta o la próxima semana?\\n\\n"
+                f"Gracias,\\nEmiliano"
+            ),
+        },
+        {
+            "step": 3,
+            "channel": "LinkedIn/Call",
+            "subject": "Touchpoint rápido",
+            "body": (
+                f"Hola {contact_name},\\n\\n"
+                f"¿Podemos coordinar un touchpoint rápido? También puedo enviar un one-pager con espacios, "
+                f"capacidades y perks para planners.\\n\\n"
+                f"Saludos"
+            ),
+        },
+    ]
+
+# -----------------------------
+# Data loader
+# -----------------------------
+@st.cache_data
+def load_seed_from_path(path: str) -> pd.DataFrame:
+    return pd.read_csv(path)
+
+def load_seed() -> pd.DataFrame:
+    default_path = "data/companies_seed.csv"
+    if os.path.exists(default_path):
+        df = load_seed_from_path(default_path)
+        st.success(f"Datos cargados desde {default_path}")
+        return df
+    else:
+        st.warning("No encontré 'data/companies_seed.csv'. Sube un CSV o crea la carpeta 'data/' y colócalo ahí.")
+        uploaded = st.file_uploader("Sube tu archivo 'companies_seed.csv'", type=["csv"])
+        if uploaded is not None:
+            df = pd.read_csv(uploaded)
+            st.success("Datos cargados desde archivo subido.")
+            return df
+        st.stop()
+
+# -----------------------------
+# App
+# -----------------------------
+st.title("SalesActivator – MICE (US Direct Segment)")
+st.caption("Demo funcional que replica 3 semanas de trabajo: prospección → enriquecimiento → outreach → dashboard")
+
+df = load_seed()
+
+expected_cols = ["company_name", "segment", "city", "state", "website"]
+missing = [c for c in expected_cols if c not in df.columns]
+if missing:
+    st.error(f"Faltan columnas en tu CSV: {missing}. Debe incluir {expected_cols}.")
+    st.stop()
+
+# Sanitización
+for c in ["company_name", "segment", "city", "state", "website"]:
+    df[c] = df[c].map(_clean_text).astype(str)
+
+# Normaliza state a 2 letras si se pasó completo (p.ej. 'California' -> 'CALIFORNIA' no es deseable)
+# Aquí asumimos que la fuente ya trae abreviaturas; si no, sólo lo pasamos a upper.
+df["state"] = df["state"].str.upper()
+
+# Dominio: si hay website -> extrae; si no -> normaliza nombre
+website_domain = df["website"].apply(extract_domain)
+fallback_domain = df["company_name"].apply(normalize_domain_from_company)
+df["domain"] = np.where(website_domain.str.len() > 0, website_domain, fallback_domain)
+
+# Score vectorizado
+df["score"] = compute_score(df["segment"], df["state"]).astype(int)
+
+# Contactos (lista por fila)
+df["contacts"] = df["domain"].apply(guess_contacts_row)
+df["n_contacts"] = df["contacts"].apply(len)
+
+# -----------------------------
+# Sidebar filtros
+# -----------------------------
+with st.sidebar:
+    st.header("Filtros")
+    states = sorted([s for s in df["state"].dropna().unique().tolist() if s])
+    segs = sorted([s for s in df["segment"].dropna().unique().tolist() if s])
+    ss = st.multiselect("Estados", states, default=states, help="Filtra por abreviatura de estado (p. ej., CA, NY).")
+    sg = st.multiselect("Segmentos", segs, default=segs)
+    min_score = st.slider("Score mínimo", 0, 100, 60, 5)
+    order_by = st.selectbox("Ordenar por", ["score desc", "company_name asc", "state asc"])
+    top_n = st.slider("Mostrar top N", min_value=10, max_value=1000, value=200, step=10)
+    st.divider()
+    st.write("Exporta resultados a CSV")
+
+# Filtrado
+mask = (
+    (df["state"].isin(ss) if ss else True) &
+    (df["segment"].isin(sg) if sg else True) &
+    (df["score"] >= min_score)
+)
+filtered = df.loc[mask].copy()
+
+# Orden
+if order_by == "score desc":
+    filtered = filtered.sort_values(["score", "company_name"], ascending=[False, True])
+elif order_by == "company_name asc":
+    filtered = filtered.sort_values("company_name", ascending=True)
+else:
+    filtered = filtered.sort_values("state", ascending=True)
+
+# Limitar a top N
+filtered = filtered.head(top_n)
+
+# -----------------------------
+# Dashboard top metrics
+# -----------------------------
+c1, c2, c3, c4 = st.columns(4)
+c1.metric("Empresas encontradas", len(df))
+c2.metric("Empresas calificadas (filtro)", len(filtered), help=f"{(len(filtered)/len(df)*100):.1f}% del total")
+total_contacts = int(filtered["n_contacts"].sum()) if len(filtered) else 0
+c3.metric("Contactos generados", total_contacts)
+c4.metric("Score promedio", round(filtered["score"].mean(), 1) if len(filtered) > 0 else 0.0)
+
+# -----------------------------
+# Tabla
+# -----------------------------
+st.subheader("Tabla de empresas calificadas")
+if len(filtered) == 0:
+    st.info("No hay resultados con los filtros actuales. Ajusta los filtros en el sidebar.")
+else:
+    st.dataframe(
+        filtered[["company_name", "segment", "city", "state", "domain", "score", "n_contacts"]],
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "company_name": "Company",
+            "segment": "Segment",
+            "city": "City",
+            "state": "State",
+            "domain": "Domain",
+            "score": st.column_config.NumberColumn("Score", help="0–100"),
+            "n_contacts": st.column_config.NumberColumn("#Contacts"),
+        },
+    )
+
+# -----------------------------
+# Contactos y outreach
+# -----------------------------
+st.subheader("Contactos y secuencia de outreach")
+
+def build_outreach_rows(df_rows: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    for _, r in df_rows.iterrows():
+        for c in r["contacts"]:
+            fname = c["full_name"].split()[0]
+            seq = outreach_sequence(r["company_name"], fname, r["segment"])
+            for s in seq:
+                rows.append({
+                    "company_name": r["company_name"],
+                    "segment": r["segment"],
+                    "city": r["city"],
+                    "state": r["state"],
+                    "contact_full_name": c["full_name"],
+                    "contact_role": c["role"],
+                    "contact_email": c["email"],
+                    "step": s["step"],
+                    "channel": s["channel"],
+                    "subject": s["subject"],
+                    "body": s["body"],
+                })
+    return pd.DataFrame(rows)
+
+if len(filtered) > 0:
+    outreach_df = build_outreach_rows(filtered)
+
+    for _, row in filtered.iterrows():
+        with st.expander(f"{row['company_name']} • {row['segment']} • {row['city']}, {row['state']} • Score {row['score']}"):
+            for c in row["contacts"]:
+                st.markdown(f"**{c['full_name']}** — {c['role']}  \\\\ `{c['email']}`")
+                seq = outreach_sequence(row["company_name"], c["full_name"].split()[0], row["segment"])
+                for s in seq:
+                    st.markdown(f"- **Paso {s['step']} ({s['channel']})** — *{s['subject']}*")
+                    st.code(s["body"], language="markdown")
+
+    st.download_button(
+        "Descargar CSV filtrado",
+        data=filtered[["company_name", "segment", "city", "state", "domain", "score"]].to_csv(index=False),
+        file_name="mice_prospects_filtered.csv",
+        mime="text/csv",
+    )
+
+    st.download_button(
+        "Descargar Outreach (CSV)",
+        data=outreach_df.to_csv(index=False),
+        file_name="mice_outreach_sequences.csv",
+        mime="text/csv",
+    )
+
+st.caption(
+    "© Demo para proceso de reclutamiento – Lógica simplificada, datos de ejemplo. "
+    "Actualizado " + datetime.now().strftime("%Y-%m-%d %H:%M")
+)
