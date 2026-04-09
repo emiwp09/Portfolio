@@ -1,0 +1,32 @@
+"nombre_estado","id_producto","total_transacciones"
+"Aguascalientes","P033",12
+"Baja California","P024",13
+"Baja California Sur","P007",11
+"CDMX","P024",13
+"Campeche","P013",12
+"Chiapas","P033",14
+"Chihuahua","P027",12
+"Coahuila","P007",13
+"Colima","P066",12
+"Durango","P085",15
+"Guanajuato","P086",14
+"Guerrero","P081",10
+"Hidalgo","P027",8
+"Jalisco","P029",11
+"Michoacan","P025",10
+"Morelos","P063",12
+"Nayarit","P078",15
+"Nuevo Leon","P087",13
+"Oaxaca","P025",10
+"Puebla","P073",12
+"Querétaro","P084",12
+"Quintana Roo","P079",12
+"San Luis Potosi","P068",11
+"Sinaloa","P031",12
+"Sonora","P066",15
+"Tabasco","P039",11
+"Tamaulipas","P059",12
+"Tlaxcala","P015",16
+"Veracruz","P039",13
+"Yucatan","P059",12
+"Zacatecas","P053",12

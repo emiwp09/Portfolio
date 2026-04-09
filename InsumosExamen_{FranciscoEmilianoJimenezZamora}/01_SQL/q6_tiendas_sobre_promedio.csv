@@ -1,0 +1,945 @@
+"id_tienda","nombre_estado","total_transacciones"
+"CLA981","Guerrero",19
+"JLY263","Tabasco",19
+"TPO813","Veracruz",19
+"UYH887","CDMX",19
+"UYX006","Coahuila",19
+"YPY527","Nayarit",19
+"AFB822","Querétaro",18
+"LIY894","Baja California",18
+"KOI562","Guerrero",17
+"NKV989","Sonora",17
+"PZA083","CDMX",17
+"ZEN067","Baja California Sur",17
+"AKA419","Sinaloa",16
+"BWV320","Guanajuato",16
+"DVG060","Tamaulipas",16
+"ELY176","Chihuahua",16
+"FDW916","Morelos",16
+"IMN583","Puebla",16
+"MJR416","Sinaloa",16
+"NHZ342","Quintana Roo",16
+"QGF495","Baja California",16
+"QKD145","Quintana Roo",16
+"SQM748","Nayarit",16
+"TMV703","Baja California Sur",16
+"ULK423","Hidalgo",16
+"XJR170","Campeche",16
+"ZLE919","Oaxaca",16
+"AAR253","Quintana Roo",15
+"BFL785","Nayarit",15
+"BQW666","Puebla",15
+"BZH648","Chiapas",15
+"FII272","Sinaloa",15
+"GVL635","Chihuahua",15
+"HEI187","Guanajuato",15
+"NYT089","Jalisco",15
+"PJA022","Baja California",15
+"PJO266","Quintana Roo",15
+"PWP658","Guerrero",15
+"QOC328","Sinaloa",15
+"SNL400","Nayarit",15
+"TLL234","Tlaxcala",15
+"UEC423","Nayarit",15
+"VDF546","Zacatecas",15
+"WTE208","Colima",15
+"WUF910","Baja California",15
+"XIH587","Tlaxcala",15
+"BUF536","Sonora",14
+"DAM380","Hidalgo",14
+"DLQ082","Tlaxcala",14
+"DSB791","Guanajuato",14
+"DWU437","Veracruz",14
+"GJF150","Tlaxcala",14
+"GRL120","Colima",14
+"HFI583","Durango",14
+"HOH141","Baja California",14
+"JOW434","Sonora",14
+"KXH464","Zacatecas",14
+"LMX936","Coahuila",14
+"NRK607","Tamaulipas",14
+"OCF340","San Luis Potosi",14
+"OGI720","Zacatecas",14
+"OUQ517","Oaxaca",14
+"PVB819","Guanajuato",14
+"QON980","Tabasco",14
+"QXP698","Colima",14
+"RQY149","CDMX",14
+"TFW867","San Luis Potosi",14
+"URP513","Baja California",14
+"XTZ120","Baja California Sur",14
+"YSK992","Tabasco",14
+"ADX973","Baja California",13
+"AHS611","Colima",13
+"ATN052","Aguascalientes",13
+"BSE787","Quintana Roo",13
+"BTJ631","Quintana Roo",13
+"CDC087","Michoacan",13
+"FHD421","Morelos",13
+"FHU829","Veracruz",13
+"IAG657","Baja California Sur",13
+"IYO432","Nayarit",13
+"JIC093","Sonora",13
+"KHP154","Veracruz",13
+"LVS653","Nayarit",13
+"MAB511","Chihuahua",13
+"MIE311","Querétaro",13
+"MJC390","Colima",13
+"MLY935","CDMX",13
+"MXQ846","Zacatecas",13
+"NSN318","Yucatan",13
+"NYJ412","Hidalgo",13
+"OKG671","Guerrero",13
+"OME276","Hidalgo",13
+"OTP129","Michoacan",13
+"PCO701","Querétaro",13
+"PGA618","Colima",13
+"RGX550","Coahuila",13
+"RJS619","Tlaxcala",13
+"RNR550","San Luis Potosi",13
+"SIW781","Jalisco",13
+"TNN796","Sinaloa",13
+"UDQ888","Colima",13
+"UGT302","Tamaulipas",13
+"UJG220","Sinaloa",13
+"UXD797","Baja California Sur",13
+"VAL988","Yucatan",13
+"VBV682","Baja California Sur",13
+"WMJ884","Zacatecas",13
+"XAC651","San Luis Potosi",13
+"XCN310","Tlaxcala",13
+"XCN856","Aguascalientes",13
+"XLA233","Chihuahua",13
+"YEG262","Nuevo Leon",13
+"ZFF149","Sonora",13
+"ZJQ440","Colima",13
+"ZUT238","Colima",13
+"ZXI978","Puebla",13
+"ZZI246","Oaxaca",13
+"ABD624","Michoacan",12
+"AEQ897","Tabasco",12
+"AMG014","Sinaloa",12
+"ARR419","Oaxaca",12
+"ATE945","Chihuahua",12
+"BAD882","Oaxaca",12
+"BKD566","Tlaxcala",12
+"BST844","Puebla",12
+"CDG759","Coahuila",12
+"COG972","Guanajuato",12
+"CRB304","Hidalgo",12
+"DGT890","Tamaulipas",12
+"DKL893","Aguascalientes",12
+"DSN870","Durango",12
+"DVV763","Durango",12
+"EAT345","Nayarit",12
+"EKA201","San Luis Potosi",12
+"EQA819","Yucatan",12
+"EWK597","Querétaro",12
+"EWZ070","Hidalgo",12
+"FBG893","Durango",12
+"FJZ278","Chihuahua",12
+"FQL994","Durango",12
+"FRQ173","Quintana Roo",12
+"GJH144","Morelos",12
+"HNE900","Yucatan",12
+"HTR740","Baja California Sur",12
+"HYU305","Michoacan",12
+"IBX086","Yucatan",12
+"JAE553","Jalisco",12
+"JNA051","Campeche",12
+"JSF475","Nuevo Leon",12
+"KBN773","Veracruz",12
+"KXM693","Sonora",12
+"LCF262","Chiapas",12
+"LCF957","Coahuila",12
+"LDU279","Querétaro",12
+"LLX891","Baja California",12
+"MSD616","Chiapas",12
+"MYR108","Colima",12
+"NHA051","Hidalgo",12
+"NHV080","Michoacan",12
+"NJP692","Guanajuato",12
+"OCB620","Tamaulipas",12
+"OIG724","Sinaloa",12
+"OKX983","Veracruz",12
+"OWW213","CDMX",12
+"PVD382","CDMX",12
+"QDJ732","Colima",12
+"QQZ196","Michoacan",12
+"QVC003","Querétaro",12
+"RNB687","Guanajuato",12
+"SEB255","Campeche",12
+"TPP184","CDMX",12
+"TQF636","Zacatecas",12
+"TRK215","Colima",12
+"UGI151","Hidalgo",12
+"ULI479","Nuevo Leon",12
+"UOS047","San Luis Potosi",12
+"VLM839","Guerrero",12
+"WSB409","Nuevo Leon",12
+"WVU654","Chiapas",12
+"XHK121","Baja California",12
+"XTC900","CDMX",12
+"XTU444","Zacatecas",12
+"YII513","Aguascalientes",12
+"YRI210","Nayarit",12
+"ZDM655","Aguascalientes",12
+"ZDQ008","Tlaxcala",12
+"ZHM038","Tlaxcala",12
+"ZOY079","Jalisco",12
+"ZPR679","Campeche",12
+"ZTN424","Guanajuato",12
+"ZVM294","Campeche",12
+"ZWK409","Durango",12
+"AOP034","Querétaro",11
+"BEI544","Oaxaca",11
+"BKA963","Zacatecas",11
+"BLP346","Coahuila",11
+"CBZ239","Tabasco",11
+"DLP745","Zacatecas",11
+"DQP973","Sinaloa",11
+"DSC926","Chiapas",11
+"DVK002","Querétaro",11
+"EIS797","Baja California Sur",11
+"EKH692","Guanajuato",11
+"ELT948","Tabasco",11
+"ENL867","Campeche",11
+"ERI780","Sinaloa",11
+"FLS507","Tamaulipas",11
+"GUF722","Oaxaca",11
+"HGC714","Chiapas",11
+"HOE198","Zacatecas",11
+"ICM994","Coahuila",11
+"IHA643","CDMX",11
+"IIE504","Sonora",11
+"JHR924","CDMX",11
+"JII127","Aguascalientes",11
+"JTD660","Zacatecas",11
+"KHU797","Durango",11
+"KMW152","Aguascalientes",11
+"LFJ942","Nuevo Leon",11
+"LJV798","Guerrero",11
+"LRR071","Campeche",11
+"MAT128","Guanajuato",11
+"MGC017","Guerrero",11
+"MMC020","Querétaro",11
+"MSP329","Durango",11
+"MTI951","Coahuila",11
+"MUH450","Aguascalientes",11
+"NEK927","Morelos",11
+"NLH317","Nayarit",11
+"NNS124","Veracruz",11
+"OEE323","Sinaloa",11
+"OFZ857","Coahuila",11
+"OGC029","Chiapas",11
+"OWH049","Guanajuato",11
+"OZW490","Sonora",11
+"PBB472","Sinaloa",11
+"PBH221","Querétaro",11
+"PCG305","Querétaro",11
+"PWW887","Puebla",11
+"QZE437","Baja California Sur",11
+"RAX153","CDMX",11
+"RPI763","Coahuila",11
+"RRK266","Guerrero",11
+"SCH942","Aguascalientes",11
+"SDM853","Querétaro",11
+"SMY750","Michoacan",11
+"SPS831","Veracruz",11
+"SUU462","Michoacan",11
+"SZG514","Baja California",11
+"TBA656","CDMX",11
+"TJS347","Aguascalientes",11
+"TTI070","Tamaulipas",11
+"TXM036","Campeche",11
+"UDY989","Nayarit",11
+"UIS971","Aguascalientes",11
+"UKN483","Sonora",11
+"ULG285","Sinaloa",11
+"UNE235","Puebla",11
+"UXF395","Zacatecas",11
+"VIM572","Morelos",11
+"VMO715","Sinaloa",11
+"VWK624","Michoacan",11
+"XEB772","Colima",11
+"XUV841","Baja California",11
+"YCJ241","San Luis Potosi",11
+"YKS160","Oaxaca",11
+"YLM556","Tlaxcala",11
+"YOV983","CDMX",11
+"YUF352","Hidalgo",11
+"YXK561","Chihuahua",11
+"ZAF804","Hidalgo",11
+"ZLK896","Puebla",11
+"AAE754","Chiapas",10
+"AFM334","Baja California",10
+"AFU836","Tlaxcala",10
+"AIQ102","Tlaxcala",10
+"APU472","Yucatan",10
+"AQD963","Guanajuato",10
+"BLT192","Hidalgo",10
+"BYA910","Quintana Roo",10
+"CEV928","Nuevo Leon",10
+"CHA306","Nayarit",10
+"CLL127","Colima",10
+"CWH082","Querétaro",10
+"CYE454","Tamaulipas",10
+"DGS529","Tabasco",10
+"DIK817","Sinaloa",10
+"DKY164","Guanajuato",10
+"DNH453","Campeche",10
+"EEG487","Tamaulipas",10
+"EEW281","Yucatan",10
+"EJD738","Yucatan",10
+"EJJ582","Querétaro",10
+"EPA372","Chihuahua",10
+"EQN999","Hidalgo",10
+"EQR051","Baja California Sur",10
+"ERN382","Baja California",10
+"EWN213","Coahuila",10
+"FEB301","San Luis Potosi",10
+"FIX781","Tabasco",10
+"FNY425","Coahuila",10
+"FZR026","Jalisco",10
+"GGZ139","Tamaulipas",10
+"GNW749","Chihuahua",10
+"GPE990","Tlaxcala",10
+"HFE207","Zacatecas",10
+"HGT426","Zacatecas",10
+"HHB339","Guerrero",10
+"HHB767","Yucatan",10
+"HJB607","Veracruz",10
+"HJC361","Coahuila",10
+"HQE202","Quintana Roo",10
+"HTT773","Tamaulipas",10
+"HWW221","Puebla",10
+"ICD050","Morelos",10
+"ION189","Sonora",10
+"ISC337","Zacatecas",10
+"JEC851","Michoacan",10
+"JYW829","Nuevo Leon",10
+"KEY709","Zacatecas",10
+"KHS171","Chiapas",10
+"KLM871","San Luis Potosi",10
+"KPG238","Sinaloa",10
+"KPY457","Chihuahua",10
+"KQI828","Baja California",10
+"LBS582","Campeche",10
+"LPI443","Baja California Sur",10
+"MAG630","Tamaulipas",10
+"MFQ983","Baja California Sur",10
+"MGA267","Durango",10
+"MMI179","Coahuila",10
+"MTJ073","Aguascalientes",10
+"MYN026","Tlaxcala",10
+"NEI287","Tamaulipas",10
+"NFU881","Quintana Roo",10
+"NIH601","Morelos",10
+"NKT912","Guerrero",10
+"NNO543","Chihuahua",10
+"NUK843","Zacatecas",10
+"NWF412","Nuevo Leon",10
+"OAV910","Chihuahua",10
+"OHV726","San Luis Potosi",10
+"ONG670","Tabasco",10
+"OQQ187","Tabasco",10
+"PYJ835","Tlaxcala",10
+"QCO902","CDMX",10
+"QCX745","Sonora",10
+"QIS398","Zacatecas",10
+"QLB830","Zacatecas",10
+"QLM035","Campeche",10
+"QLX958","Nuevo Leon",10
+"RLP530","Querétaro",10
+"RLY457","Veracruz",10
+"RNV099","Quintana Roo",10
+"RZS677","CDMX",10
+"SDI381","Quintana Roo",10
+"SDZ409","Hidalgo",10
+"SOK800","Jalisco",10
+"SRF721","Coahuila",10
+"TMA932","Nayarit",10
+"TRU402","Baja California Sur",10
+"TVU095","Durango",10
+"UCL704","Baja California",10
+"UEE379","Querétaro",10
+"UJP823","Nuevo Leon",10
+"UON489","Nayarit",10
+"VBK371","Nuevo Leon",10
+"VDK340","Chiapas",10
+"VFE344","Veracruz",10
+"VMO868","CDMX",10
+"VMS050","Campeche",10
+"VOO946","Quintana Roo",10
+"VPM092","Quintana Roo",10
+"VWU171","Guanajuato",10
+"WAJ680","CDMX",10
+"WBJ559","Chihuahua",10
+"WPI132","Nayarit",10
+"WPL528","CDMX",10
+"XCB494","Baja California",10
+"XDV085","Veracruz",10
+"XPZ765","Durango",10
+"XSM297","Veracruz",10
+"YHQ301","CDMX",10
+"YND657","Nuevo Leon",10
+"YNM865","Zacatecas",10
+"YXS480","Baja California Sur",10
+"ZBF966","Querétaro",10
+"ZDD484","Guanajuato",10
+"ZTM469","Zacatecas",10
+"ZXL533","Yucatan",10
+"ABM654","Nayarit",9
+"AEN873","Baja California",9
+"AFQ772","Guanajuato",9
+"AQF356","Michoacan",9
+"AZR964","San Luis Potosi",9
+"BAB871","Baja California",9
+"BBE372","Tlaxcala",9
+"BFU117","Zacatecas",9
+"BGM242","CDMX",9
+"BJR673","Coahuila",9
+"BKA776","Guanajuato",9
+"BKM509","Quintana Roo",9
+"BMY614","Baja California",9
+"BMY695","Querétaro",9
+"BOJ433","Nayarit",9
+"BSG052","Baja California Sur",9
+"BSP120","Aguascalientes",9
+"BXT813","Tamaulipas",9
+"BYF717","Zacatecas",9
+"BYI632","Coahuila",9
+"CBH881","Nuevo Leon",9
+"CFF870","CDMX",9
+"CGJ652","Hidalgo",9
+"CJM814","CDMX",9
+"CJV618","Zacatecas",9
+"COX657","Puebla",9
+"CPB426","Coahuila",9
+"CPU479","Puebla",9
+"CVY720","Coahuila",9
+"CYN480","Sonora",9
+"DOM544","Tabasco",9
+"DSC753","Tlaxcala",9
+"DWB944","Tamaulipas",9
+"DWU791","Zacatecas",9
+"DXH810","Sonora",9
+"DXT937","Oaxaca",9
+"EHL636","Veracruz",9
+"EIC978","Oaxaca",9
+"ENR478","Sinaloa",9
+"ESL751","San Luis Potosi",9
+"ESM476","Nayarit",9
+"FAF530","San Luis Potosi",9
+"FCO872","Baja California",9
+"FKP282","Querétaro",9
+"FPY188","Oaxaca",9
+"FVP696","Nuevo Leon",9
+"FYJ532","Jalisco",9
+"GBJ775","Baja California Sur",9
+"GMM034","Yucatan",9
+"GNK676","Campeche",9
+"GNX876","Baja California",9
+"GVD746","Tamaulipas",9
+"GVL930","Campeche",9
+"HEL565","CDMX",9
+"HFJ669","Nayarit",9
+"HFT781","Durango",9
+"HPJ931","Morelos",9
+"HRY064","Nuevo Leon",9
+"ICX200","Chihuahua",9
+"ISC313","San Luis Potosi",9
+"IWG506","Colima",9
+"JBC774","CDMX",9
+"JDI411","Zacatecas",9
+"JEL364","Jalisco",9
+"JEQ448","Michoacan",9
+"JEY190","Puebla",9
+"JLO504","Coahuila",9
+"JPG102","Baja California Sur",9
+"JTK360","Baja California",9
+"JUE389","Yucatan",9
+"JUV776","Michoacan",9
+"JXO540","Jalisco",9
+"KDG890","Querétaro",9
+"KGM109","Chihuahua",9
+"KLH276","Nayarit",9
+"KOV031","Jalisco",9
+"KQH617","Zacatecas",9
+"KQK587","Puebla",9
+"LGJ064","Durango",9
+"LIP239","Baja California",9
+"LNU526","Veracruz",9
+"LOB507","Chihuahua",9
+"LVX748","Sinaloa",9
+"MAF381","Aguascalientes",9
+"MCN704","Chiapas",9
+"MFJ524","Oaxaca",9
+"MGM520","Baja California Sur",9
+"MHQ919","Hidalgo",9
+"MLV674","Yucatan",9
+"MUH495","Tlaxcala",9
+"NGW054","Guanajuato",9
+"NJO970","Chiapas",9
+"NJT151","Guerrero",9
+"NLN423","Durango",9
+"NNF852","Michoacan",9
+"NQI555","Chihuahua",9
+"NSU325","Tabasco",9
+"NYY563","Tabasco",9
+"NZQ566","Tlaxcala",9
+"OBA318","Chiapas",9
+"OBT031","Chihuahua",9
+"OCW966","Nuevo Leon",9
+"ODR033","Veracruz",9
+"OJK103","Nuevo Leon",9
+"OQC057","Tabasco",9
+"ORX608","Yucatan",9
+"OWR442","Morelos",9
+"OZM017","Coahuila",9
+"PAF206","Sinaloa",9
+"PGH994","Durango",9
+"PLT126","Tabasco",9
+"PWR776","Veracruz",9
+"PZW753","Sinaloa",9
+"QKN900","Aguascalientes",9
+"QPF184","Oaxaca",9
+"QTC535","Colima",9
+"QYI635","Campeche",9
+"RCW395","Campeche",9
+"RER866","Coahuila",9
+"RFR089","Nuevo Leon",9
+"RGG757","Oaxaca",9
+"RGN831","Chiapas",9
+"RHI966","Guerrero",9
+"RHN650","Chiapas",9
+"ROR774","Puebla",9
+"RPQ743","Guanajuato",9
+"RQI074","Baja California Sur",9
+"RRH488","Zacatecas",9
+"RRV281","Yucatan",9
+"SKL388","San Luis Potosi",9
+"SLA333","Morelos",9
+"TDT632","Tabasco",9
+"UND194","Guerrero",9
+"UNH884","Campeche",9
+"UTT534","Zacatecas",9
+"UVV648","Morelos",9
+"UYG070","Tlaxcala",9
+"UYL623","Michoacan",9
+"VBZ289","Morelos",9
+"VNH837","Baja California Sur",9
+"VRA133","Veracruz",9
+"VRD832","Jalisco",9
+"VVX347","Coahuila",9
+"WBA184","Puebla",9
+"WBD508","San Luis Potosi",9
+"WBV633","Querétaro",9
+"WCN042","Chihuahua",9
+"WNY636","Guanajuato",9
+"WPW213","Morelos",9
+"WQN022","Colima",9
+"WWL910","Baja California Sur",9
+"WYN044","Yucatan",9
+"XBM906","Campeche",9
+"XHL479","Michoacan",9
+"XKC301","Nayarit",9
+"XLM971","Durango",9
+"XMI329","Tamaulipas",9
+"XSR212","San Luis Potosi",9
+"XTP230","Oaxaca",9
+"XVA324","CDMX",9
+"XZF575","Baja California",9
+"YBT831","Baja California Sur",9
+"YDO763","Campeche",9
+"YKK152","Veracruz",9
+"YMC313","Puebla",9
+"YMG380","Tabasco",9
+"YNZ615","Tamaulipas",9
+"YTT027","Durango",9
+"YWH347","Morelos",9
+"ZCT281","Campeche",9
+"ZEG688","Sinaloa",9
+"ZHI415","Colima",9
+"ZIT117","Tabasco",9
+"ZLR011","Nayarit",9
+"ZOI296","Sonora",9
+"ZPR051","Puebla",9
+"ZQN688","Morelos",9
+"ZQZ558","Colima",9
+"ZTV280","Tlaxcala",9
+"ZVN190","Sonora",9
+"ZYN741","Durango",9
+"AQR868","Durango",8
+"ASY826","Sinaloa",8
+"AWE170","Guerrero",8
+"BAS289","Tlaxcala",8
+"BEX342","Coahuila",8
+"BHV932","Colima",8
+"BKQ304","Aguascalientes",8
+"BKY309","Chihuahua",8
+"BMX535","Tabasco",8
+"BPH658","Sinaloa",8
+"BQK067","Quintana Roo",8
+"BXY982","Tamaulipas",8
+"CAL644","Coahuila",8
+"CFR905","Zacatecas",8
+"CVN278","Guanajuato",8
+"CXV571","CDMX",8
+"DCW063","Aguascalientes",8
+"DDH204","San Luis Potosi",8
+"DDI927","Colima",8
+"DDW420","Aguascalientes",8
+"DOS256","CDMX",8
+"DTC102","Nuevo Leon",8
+"DVB381","Tlaxcala",8
+"DVJ186","Chiapas",8
+"DXG514","Sinaloa",8
+"DZY155","Tabasco",8
+"EHR909","Tamaulipas",8
+"ESF650","Guanajuato",8
+"ESV062","Aguascalientes",8
+"EVD779","Quintana Roo",8
+"EYQ548","Tlaxcala",8
+"EYT859","Aguascalientes",8
+"FHK446","Puebla",8
+"GAZ624","Baja California Sur",8
+"GCN340","Sinaloa",8
+"GEQ272","San Luis Potosi",8
+"GKU040","San Luis Potosi",8
+"GKV791","Baja California Sur",8
+"GOC183","Nuevo Leon",8
+"GPL794","Querétaro",8
+"GRQ912","Campeche",8
+"GUY034","Jalisco",8
+"GXL161","Morelos",8
+"GYO488","Puebla",8
+"GZG326","Hidalgo",8
+"HBN686","Guerrero",8
+"HFB930","Sinaloa",8
+"HIW811","Tlaxcala",8
+"HKJ021","Morelos",8
+"HON455","Hidalgo",8
+"HPS394","Baja California Sur",8
+"HUF520","Veracruz",8
+"HYA072","Querétaro",8
+"HYI622","Nuevo Leon",8
+"ICY267","Michoacan",8
+"IIA820","Coahuila",8
+"IKX701","Nuevo Leon",8
+"ILS319","Chiapas",8
+"IMU843","Guerrero",8
+"INO521","Zacatecas",8
+"INU269","Aguascalientes",8
+"ISO428","Guanajuato",8
+"IWF770","Coahuila",8
+"IYX118","Quintana Roo",8
+"JAA769","Nayarit",8
+"JIE168","Sinaloa",8
+"JIM606","Hidalgo",8
+"JQR661","Campeche",8
+"JSZ530","Tlaxcala",8
+"JXR934","Jalisco",8
+"KDM366","Tamaulipas",8
+"KGB403","Tabasco",8
+"KLA292","Jalisco",8
+"KLF029","Jalisco",8
+"KLQ626","Tlaxcala",8
+"KOT321","Chiapas",8
+"KTY033","Campeche",8
+"KVI973","Veracruz",8
+"KVO925","Guanajuato",8
+"KWT853","Sonora",8
+"LAZ044","Tabasco",8
+"LBK933","San Luis Potosi",8
+"LIP446","Morelos",8
+"LMR203","Chiapas",8
+"LNC907","Nuevo Leon",8
+"LOT063","Quintana Roo",8
+"LQH527","Sonora",8
+"LTI003","Chiapas",8
+"LUB744","Sonora",8
+"LZU856","Nuevo Leon",8
+"MAB145","Tabasco",8
+"MDO186","Morelos",8
+"MEG504","Baja California",8
+"MGV187","Querétaro",8
+"MJA894","Chiapas",8
+"MLO288","Morelos",8
+"MNR130","Baja California",8
+"MRJ621","Aguascalientes",8
+"NFI525","Guerrero",8
+"NIX850","Sonora",8
+"NPP074","Oaxaca",8
+"NQK337","Zacatecas",8
+"NQV631","Quintana Roo",8
+"NSA199","Quintana Roo",8
+"ODB004","Jalisco",8
+"OEI900","Sonora",8
+"OJU947","Nuevo Leon",8
+"OSA243","Michoacan",8
+"OYU922","Querétaro",8
+"PBV893","Quintana Roo",8
+"PHI169","CDMX",8
+"PMT390","Chiapas",8
+"PUI835","Michoacan",8
+"PVJ310","Guerrero",8
+"QFJ967","San Luis Potosi",8
+"QII481","San Luis Potosi",8
+"QKB973","Puebla",8
+"QLP921","Zacatecas",8
+"QMP523","Puebla",8
+"QMP865","Baja California",8
+"QRM718","Yucatan",8
+"QXR576","Oaxaca",8
+"RDH761","Guanajuato",8
+"RFC387","Nayarit",8
+"RFS505","Coahuila",8
+"RGG629","Puebla",8
+"RRJ456","Coahuila",8
+"RVN440","Campeche",8
+"RVS680","Guanajuato",8
+"SBC548","Puebla",8
+"SCA422","Tlaxcala",8
+"SGU862","Nuevo Leon",8
+"SLB600","Hidalgo",8
+"SOS942","Quintana Roo",8
+"SYR538","Nayarit",8
+"TGN449","Tlaxcala",8
+"TKV489","Morelos",8
+"TMZ996","Tabasco",8
+"TXJ041","Oaxaca",8
+"UEL327","Puebla",8
+"UHE238","Durango",8
+"UJK751","Veracruz",8
+"UMK552","Veracruz",8
+"URS504","Nayarit",8
+"URT670","Coahuila",8
+"URZ823","Oaxaca",8
+"UVZ193","Campeche",8
+"UWP598","Nayarit",8
+"VAV020","Guanajuato",8
+"VCZ258","Jalisco",8
+"VDY561","Baja California",8
+"VER709","Tlaxcala",8
+"VOF077","Quintana Roo",8
+"VTW335","Nuevo Leon",8
+"VUB231","Chihuahua",8
+"VVI041","Hidalgo",8
+"VXV998","Aguascalientes",8
+"WBJ750","Colima",8
+"WBZ370","Tlaxcala",8
+"WCP350","Colima",8
+"WEZ423","Morelos",8
+"WGE307","Yucatan",8
+"WIX284","Nayarit",8
+"WNA881","Nuevo Leon",8
+"WPH522","Hidalgo",8
+"WTF404","Sonora",8
+"WYW383","Quintana Roo",8
+"XCC121","Colima",8
+"XEI453","Nuevo Leon",8
+"XMW819","Yucatan",8
+"XYR009","Hidalgo",8
+"XZA399","Colima",8
+"YDJ342","Veracruz",8
+"YEF275","Hidalgo",8
+"YLF020","Veracruz",8
+"YTZ146","Nayarit",8
+"ZAU396","Yucatan",8
+"ZKD717","Chiapas",8
+"ZZK737","Guanajuato",8
+"AIC719","Sonora",7
+"ALT874","Zacatecas",7
+"ALX869","Tabasco",7
+"AOG078","Morelos",7
+"AOR061","Tabasco",7
+"AYQ457","Quintana Roo",7
+"BBF768","Coahuila",7
+"BDI265","Baja California Sur",7
+"BJU792","Hidalgo",7
+"BLZ063","Veracruz",7
+"BRT604","Veracruz",7
+"CCM243","Michoacan",7
+"CCU755","Durango",7
+"CFI171","Zacatecas",7
+"CRF564","Durango",7
+"DDF666","Zacatecas",7
+"DEK069","Yucatan",7
+"DJR669","Morelos",7
+"DQW160","Zacatecas",7
+"DUN310","Sonora",7
+"DYE713","Yucatan",7
+"EAC302","Jalisco",7
+"EBR827","Michoacan",7
+"EKL503","Veracruz",7
+"EMI555","Baja California Sur",7
+"ENQ413","Michoacan",7
+"EOV688","Tabasco",7
+"ERX568","Jalisco",7
+"ETX567","Tamaulipas",7
+"EVW160","Michoacan",7
+"EWP877","Oaxaca",7
+"FBF638","Nuevo Leon",7
+"FDC885","Sinaloa",7
+"FDJ478","Baja California",7
+"FKJ160","Aguascalientes",7
+"FZG591","Baja California",7
+"GAU166","Chihuahua",7
+"GIT817","Sonora",7
+"GNR038","Tamaulipas",7
+"GOZ510","Campeche",7
+"GRI684","Aguascalientes",7
+"GRQ192","Baja California",7
+"GSV508","Michoacan",7
+"GXC123","Querétaro",7
+"GZG181","Baja California",7
+"HBO701","Sonora",7
+"HEU709","CDMX",7
+"HNZ195","Coahuila",7
+"HSC683","Querétaro",7
+"HSJ181","Querétaro",7
+"IEG110","Baja California Sur",7
+"IKE531","Nuevo Leon",7
+"IRQ795","CDMX",7
+"ISN016","Colima",7
+"ITL845","Zacatecas",7
+"IVC528","Durango",7
+"JFK458","Veracruz",7
+"JJF281","Yucatan",7
+"JJX906","Guerrero",7
+"JLH595","Campeche",7
+"JOC175","San Luis Potosi",7
+"JOX027","Campeche",7
+"JSZ329","Veracruz",7
+"JTG223","Campeche",7
+"JXP899","Morelos",7
+"JYF561","Sonora",7
+"JZR980","Yucatan",7
+"KBC891","Tlaxcala",7
+"KNE889","Michoacan",7
+"KOO547","Tamaulipas",7
+"KPN824","Querétaro",7
+"KXX622","Nayarit",7
+"LDQ594","Michoacan",7
+"LFY199","Colima",7
+"LGW271","Puebla",7
+"MKK795","Jalisco",7
+"MMS556","Yucatan",7
+"MOF111","Tamaulipas",7
+"MPO240","Baja California Sur",7
+"NBP488","Nuevo Leon",7
+"NFY259","Colima",7
+"NGB460","Chihuahua",7
+"NJL607","Jalisco",7
+"NNT273","Guanajuato",7
+"NQM779","Morelos",7
+"NQT742","Colima",7
+"NTH150","Baja California",7
+"OBP182","Puebla",7
+"OCG996","Tlaxcala",7
+"ONH284","Morelos",7
+"OQF231","Quintana Roo",7
+"OTY307","Coahuila",7
+"OWD541","Michoacan",7
+"OYL245","Aguascalientes",7
+"OYU060","Tlaxcala",7
+"PCA948","Veracruz",7
+"PEW948","Chiapas",7
+"PKE465","Durango",7
+"PKG992","Coahuila",7
+"PLJ759","Colima",7
+"POK769","Guanajuato",7
+"PPC610","Tamaulipas",7
+"PSH124","Durango",7
+"PUA784","Nayarit",7
+"PVU764","Yucatan",7
+"PWY696","Puebla",7
+"PYK599","Colima",7
+"QBH097","Baja California",7
+"QGB632","Colima",7
+"QGO163","Aguascalientes",7
+"QHQ578","Coahuila",7
+"QIO810","Baja California",7
+"QNK590","Zacatecas",7
+"QNR094","Durango",7
+"QPB169","Morelos",7
+"QPH598","Oaxaca",7
+"QTS992","Campeche",7
+"QZJ127","Sinaloa",7
+"RAW726","Morelos",7
+"REX073","Yucatan",7
+"RIU197","Tabasco",7
+"RJB645","Zacatecas",7
+"RMJ700","Querétaro",7
+"RNL303","Tamaulipas",7
+"RQA162","Nuevo Leon",7
+"RSR166","CDMX",7
+"RXH251","Querétaro",7
+"RZF351","Baja California Sur",7
+"SBX689","Michoacan",7
+"SEM442","Puebla",7
+"SFM881","Nayarit",7
+"SHK571","Quintana Roo",7
+"SJA798","Chihuahua",7
+"SLB646","Chihuahua",7
+"SLC069","Chiapas",7
+"STG546","Tamaulipas",7
+"SUF596","Nuevo Leon",7
+"SYF323","CDMX",7
+"TAC215","Coahuila",7
+"TAE429","Chihuahua",7
+"TAE673","Baja California Sur",7
+"TAJ942","Nayarit",7
+"TFG478","Chiapas",7
+"TQD205","Nuevo Leon",7
+"TSX031","Guerrero",7
+"UDJ222","Colima",7
+"UEK147","Durango",7
+"ULN810","Nayarit",7
+"ULU552","Hidalgo",7
+"UNJ547","Morelos",7
+"UQC629","San Luis Potosi",7
+"UQI434","Jalisco",7
+"UYT597","Morelos",7
+"VAK564","CDMX",7
+"VJP499","Sonora",7
+"VMN179","Puebla",7
+"VUY684","Aguascalientes",7
+"VWJ944","CDMX",7
+"WCE165","Colima",7
+"WFH207","Nuevo Leon",7
+"WJP506","Campeche",7
+"WKH641","Chihuahua",7
+"WPL840","Colima",7
+"WRV101","Quintana Roo",7
+"WTW897","Nuevo Leon",7
+"WUT879","Chihuahua",7
+"WXQ037","Chihuahua",7
+"WXZ707","Chiapas",7
+"WYS680","San Luis Potosi",7
+"XAP768","Jalisco",7
+"XCR840","Chiapas",7
+"XEQ985","Sonora",7
+"XKJ915","Oaxaca",7
+"XOX323","Baja California Sur",7
+"XPK202","Jalisco",7
+"XTQ306","San Luis Potosi",7
+"XVU340","Tabasco",7
+"XWD685","Querétaro",7
+"XXY411","Veracruz",7
+"XZG762","Sonora",7
+"XZL504","Jalisco",7
+"YGW890","Guerrero",7
+"YJB437","Guerrero",7
+"YSF010","Puebla",7
+"YXY142","Aguascalientes",7
+"YZR363","Yucatan",7
+"YZT656","Aguascalientes",7
+"ZFP053","Durango",7
+"ZFU700","Guanajuato",7
+"ZHC247","Tamaulipas",7
+"ZIP414","Tabasco",7
+"ZLR833","Nayarit",7
+"ZQQ834","Baja California",7
+"ZYD299","Campeche",7

@@ -1,0 +1,8 @@
+Se resolvieron los 10 ejercicios prácticos de SQL mediante un enfoque híbrido en R, utilizando la librería sqldf para ejecutar consultas con 
+sintaxis de Impala/Hive sobre las bases de transacciones, productos y tiendas. Este flujo de trabajo permitió aplicar técnicas avanzadas como 
+Common Table Expressions (CTEs) y funciones de ventana (ROW_NUMBER, LAG, etc.) para realizar rankings precisos por estado y análisis de 
+variaciones mensuales, demostrando una alta capacidad técnica para integrar distintos lenguajes en la resolución de problemas de negocio complejos.
+
+Para asegurar la entrega de resultados accionables, cada una de las 10 soluciones fue exportada automáticamente en archivos CSV independientes, 
+generando una base de datos de salida clara y estructurada. Este método de trabajo no solo garantiza la reproducibilidad total del análisis, sino que 
+facilita la auditoría de los datos al entregar tablas resumen descriptivas listas para su integración en cualquier reporte o herramienta de visualización.

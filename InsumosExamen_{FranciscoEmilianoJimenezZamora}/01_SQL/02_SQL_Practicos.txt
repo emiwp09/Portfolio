@@ -1,0 +1,214 @@
+SQL (Impala)
+Ejercicios prácticos
+
+
+1. Número y monto de ventas por estado ordenado de mayor a menor (prelación por txns y luego por monto).
+
+SELECT
+    bti.nombre_estado,                 
+    COUNT(*) AS cantidad_transacciones,                       -- total de transacciones realizadas en ese estado.
+    SUM(bp.precio) AS monto_total_ventas                   -- suma el precio de los productos vendidos en ese estado.
+FROM base_transacciones bt
+JOIN base_productos bp
+    ON bt.id_producto = bp.id_producto 
+JOIN base_tiendas bti
+    ON bt.id_tienda = bti.id_tienda                         -- une transacciones con tiendas para obtener el estado.
+GROUP BY bti.nombre_estado            
+ORDER BY cantidad_transacciones DESC,  
+         monto_total_ventas DESC;                           -- en caso de empate, ordenar por mayor monto total.
+
+
+2. Top 5 productos con mayor número de transacciones.
+
+SELECT
+    bt.id_producto,
+    COUNT(*) AS total_transacciones
+FROM base_transacciones bt
+GROUP BY bt.id_producto
+ORDER BY total_transacciones DESC,                -- ordena de mayor a menor el número de transacciones.
+	bt.id_producto ASC                        -- si hay empate, se ordena por id del producto.
+LIMIT 5;
+
+
+3. Precio promedio por producto considerando solo ventas.
+
+SELECT
+    bt.id_producto,
+    AVG(bp.precio) AS precio_promedio
+FROM base_transacciones bt
+JOIN base_productos bp
+    ON bt.id_producto = bp.id_producto
+GROUP BY bt.id_producto
+ORDER BY bt.id_producto;
+
+
+
+4. Última fecha de compra por tienda.
+
+SELECT
+    bt.id_tienda,                                        -- identicador de tienda.
+    MAX(bt.fecha_compra) AS ultima_fecha_compra          -- fecha más reciente de compra en esa tienda.
+FROM base_transacciones bt
+GROUP BY bt.id_tienda
+ORDER BY bt.id_tienda;
+
+
+5. Productos que nunca se vendieron por estado.
+
+SELECT
+    bti.nombre_estado,
+    bp.id_producto
+FROM base_tiendas bti
+CROSS JOIN base_productos bp                          --crea todas la posibles uniones de prodcuto y estado.
+LEFT JOIN (                                             --busca cuales si tuvieron ventas.
+    SELECT DISTINCT
+        bti2.nombre_estado,
+        bt.id_producto
+    FROM base_transacciones bt
+    JOIN base_tiendas bti2                        --se uso bti2 para no causar confusion, es valido ya que es uan subconsulta en otro bloque.
+        ON bt.id_tienda = bti2.id_tienda
+) v
+    ON bti.nombre_estado = v.nombre_estado
+   AND bp.id_producto = v.id_producto
+WHERE v.id_producto IS NULL                       --con esto nos quedamos con las convinaciones que nunca se vendieron
+ORDER BY bti.nombre_estado, bp.id_producto;
+
+
+6. Si N es el número de transacciones promedio histórico por tienda. ¿Cuáles son las tiendas que rebasan N?
+
+WITH transacciones_por_tienda AS (              --cuenta el total de transacciones realizadas por cada tienda.
+    SELECT
+        bt.id_tienda,
+        COUNT(*) AS total_transacciones
+    FROM base_transacciones bt
+    GROUP BY bt.id_tienda
+),
+promedio_historico AS (                     --promedio histórico de transacciones entre todas las tiendas.
+    SELECT
+        AVG(total_transacciones) AS N                  --promedio de transacciones por tienda.
+    FROM transacciones_por_tienda
+)
+SELECT
+    tpt.id_tienda,
+    bti.nombre_estado,
+    tpt.total_transacciones
+FROM transacciones_por_tienda tpt
+
+JOIN base_tiendas bti                             --unión con la tabla de tiendas para obtener el nombre del estado.
+    ON tpt.id_tienda = bti.id_tienda
+CROSS JOIN promedio_historico ph                              --agregue el promedio histórico a toda la consulta para poder compararlo.
+WHERE tpt.total_transacciones > ph.N                        --se filtró solo las tiendas cuyo total de transacciones sea mayor al promedio.
+ORDER BY tpt.total_transacciones DESC, tpt.id_tienda;
+
+
+7. Producto más vendido por cada estado.
+
+WITH ventas_producto_estado AS (                        --cuántas transacciones tuvo cada producto en cada estado.
+    SELECT
+        bti.nombre_estado,                 
+        bt.id_producto,                    
+        COUNT(*) AS total_transacciones    
+    FROM base_transacciones bt
+    JOIN base_tiendas bti
+        ON bt.id_tienda = bti.id_tienda                -- une transacciones con tiendas para obtener el estado.
+    GROUP BY bti.nombre_estado, bt.id_producto
+),
+
+ranking_productos AS (                        -- asignamos un ranking(record) a los productos dentro de cada estado.
+    SELECT
+        nombre_estado,                     
+        id_producto,                       
+        total_transacciones,               
+        ROW_NUMBER() OVER (
+            PARTITION BY nombre_estado                      -- reinicia el conteo para cada estado.
+            ORDER BY total_transacciones DESC, id_producto ASC
+        ) AS rn
+    FROM ventas_producto_estado
+)
+
+SELECT                                           --producto con más transacciones por cada estado.
+    nombre_estado,                         
+    id_producto,                           
+    total_transacciones                    
+FROM ranking_productos
+WHERE rn = 1                               -- nos quedamos con el primer lugar de cada estado.
+ORDER BY nombre_estado;                    
+
+
+8. Promedio de días entre lanzamiento del producto y su primera venta.
+
+WITH primera_venta_producto AS (
+    SELECT
+        bt.id_producto,
+        MIN(bt.fecha_compra) AS primera_fecha_venta                   -- primera fecha en la que se vendió ese producto.
+    FROM base_transacciones bt
+    GROUP BY bt.id_producto                                        -- agrupamois por producto para encontrar su primera venta.
+)
+SELECT
+    AVG(DATEDIFF(pvp.primera_fecha_venta, bp.fecha_lanzamiento)) AS promedio_dias                    -- calcula el promedio de días entre lanzamiento y primera venta.
+FROM primera_venta_producto pvp
+JOIN base_productos bp
+    ON pvp.id_producto = bp.id_producto;                     -- se une con la tabla de productos y obtenmos la fecha de lanzamiento.
+
+
+9. Top 3 días con más transacciones.
+
+SELECT
+    bt.fecha_compra,
+    COUNT(*) AS total_transacciones                            --total de transacciones en esa fecha.
+FROM base_transacciones bt
+GROUP BY bt.fecha_compra
+ORDER BY total_transacciones DESC, bt.fecha_compra ASC                   --si hay un empate, se ordena por fecha ascendente.
+LIMIT 3;
+
+
+10.¿Qué producto tiene mayor caída de ventas (tendencia mes a mes)?
+
+WITH ventas_mensuales AS (                             -- calcular las ventas mensuales por producto.
+    SELECT
+        bt.id_producto,                                                                  -- identificador del producto.
+        CONCAT(CAST(YEAR(bt.fecha_compra) AS STRING), '-',
+               LPAD(CAST(MONTH(bt.fecha_compra) AS STRING), 2, '0')) AS year_mes,                -- construimos el periodo en formato YYYY-MM.
+        COUNT(*) AS total_ventas                                                           -- total de ventas del producto en ese mes.
+    FROM base_transacciones bt
+    GROUP BY
+        bt.id_producto,
+        CONCAT(CAST(YEAR(bt.fecha_compra) AS STRING), '-',
+               LPAD(CAST(MONTH(bt.fecha_compra) AS STRING), 2, '0'))
+),
+
+caida_mensual AS (                                        -- por faciidad se compara contra el mes anterior.
+    SELECT
+        id_producto,
+        year_mes,
+        total_ventas,
+        total_ventas - LAG(total_ventas) OVER (
+            PARTITION BY id_producto
+            ORDER BY year_mes
+        ) AS diferencia_vs_mes_anterior                    -- cambio respecto al mes anterior.
+    FROM ventas_mensuales
+)
+
+SELECT                                                   -- se obtiene la mayor caída mensual.
+    id_producto,
+    year_mes,
+    total_ventas,
+    diferencia_vs_mes_anterior
+FROM caida_mensual
+WHERE diferencia_vs_mes_anterior IS NOT NULL
+ORDER BY diferencia_vs_mes_anterior ASC
+LIMIT 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,329 @@
+---
+title: "Examen SQL (Impala) en R"
+output: html_notebook
+---
+
+
+
+```{r setup, message=FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+library(sqldf)
+library(lubridate)
+```
+
+
+# Carga de archivos
+
+```{r carga_archivos}
+base_productos <- read_delim(
+  "C:/Users/Emiliano/Desktop/InsumosExamen/base_productos.txt",
+  delim = "|",
+  show_col_types = FALSE,
+  trim_ws = TRUE
+)
+
+base_tiendas <- read_delim(
+  "C:/Users/Emiliano/Desktop/InsumosExamen/base_tiendas.txt",
+  delim = "|",
+  show_col_types = FALSE,
+  trim_ws = TRUE
+)
+
+base_transacciones <- read_delim(
+  "C:/Users/Emiliano/Desktop/InsumosExamen/base_transacciones.txt",
+  delim = "|",
+  show_col_types = FALSE,
+  trim_ws = TRUE
+)
+```
+
+# Conversión de fechas
+
+
+```{r}
+base_productos$fecha_lanzamiento <- as.Date(base_productos$fecha_lanzamiento)
+base_tiendas$fecha_apertura <- as.Date(base_tiendas$fecha_apertura)
+base_transacciones$fecha_compra <- as.Date(base_transacciones$fecha_compra)
+```
+
+##Se convirtieron las columnas de fecha al tipo Date para asegurar un manejo correcto en filtros, agregaciones y cálculos temporales.
+
+
+# Consulta 1
+## Número y monto de ventas por estado ordenado de mayor a menor
+
+```{r q1}
+q1 <- sqldf("
+SELECT
+    bti.nombre_estado,
+    COUNT(*) AS cantidad_transacciones,
+    SUM(bp.precio) AS monto_total_ventas
+FROM base_transacciones bt
+JOIN base_productos bp
+    ON bt.id_producto = bp.id_producto
+JOIN base_tiendas bti
+    ON bt.id_tienda = bti.id_tienda
+GROUP BY bti.nombre_estado
+ORDER BY cantidad_transacciones DESC,
+         monto_total_ventas DESC
+")
+
+q1
+```
+
+# Consulta 2
+## Top 5 productos con mayor número de transacciones
+
+```{r q2}
+q2 <- sqldf("
+SELECT
+    bt.id_producto,
+    COUNT(*) AS total_transacciones
+FROM base_transacciones bt
+GROUP BY bt.id_producto
+ORDER BY total_transacciones DESC,
+         bt.id_producto ASC
+LIMIT 5
+")
+
+q2
+```
+
+# Consulta 3
+## Precio promedio por producto considerando solo ventas
+
+```{r q3}
+q3 <- sqldf("
+SELECT
+    bt.id_producto,
+    AVG(bp.precio) AS precio_promedio
+FROM base_transacciones bt
+JOIN base_productos bp
+    ON bt.id_producto = bp.id_producto
+GROUP BY bt.id_producto
+ORDER BY bt.id_producto
+")
+
+q3
+```
+
+# Consulta 4
+## Última fecha de compra por tienda
+
+```{r q4}
+q4 <- sqldf("
+SELECT
+    bt.id_tienda,
+    MAX(bt.fecha_compra) AS ultima_fecha_compra
+FROM base_transacciones bt
+GROUP BY bt.id_tienda
+ORDER BY bt.id_tienda
+")
+
+q4
+```
+
+# Consulta 5
+## Productos que nunca se vendieron por estado
+
+```{r q5}
+q5 <- sqldf("
+SELECT
+    bti.nombre_estado,
+    bp.id_producto
+FROM base_tiendas bti
+CROSS JOIN base_productos bp
+LEFT JOIN (
+    SELECT DISTINCT
+        bti2.nombre_estado,
+        bt.id_producto
+    FROM base_transacciones bt
+    JOIN base_tiendas bti2
+        ON bt.id_tienda = bti2.id_tienda
+) v
+    ON bti.nombre_estado = v.nombre_estado
+   AND bp.id_producto = v.id_producto
+WHERE v.id_producto IS NULL
+ORDER BY bti.nombre_estado, bp.id_producto
+")
+
+q5
+```
+
+# Consulta 6
+## Tiendas que rebasan el promedio histórico de transacciones
+
+```{r q6}
+q6 <- sqldf("
+WITH transacciones_por_tienda AS (
+    SELECT
+        bt.id_tienda,
+        COUNT(*) AS total_transacciones
+    FROM base_transacciones bt
+    GROUP BY bt.id_tienda
+),
+promedio_historico AS (
+    SELECT
+        AVG(total_transacciones) AS N
+    FROM transacciones_por_tienda
+)
+SELECT
+    tpt.id_tienda,
+    bti.nombre_estado,
+    tpt.total_transacciones
+FROM transacciones_por_tienda tpt
+JOIN base_tiendas bti
+    ON tpt.id_tienda = bti.id_tienda
+CROSS JOIN promedio_historico ph
+WHERE tpt.total_transacciones > ph.N
+ORDER BY tpt.total_transacciones DESC, tpt.id_tienda
+")
+
+q6
+```
+
+# Consulta 7
+## Producto más vendido por cada estado
+
+```{r q7}
+q7 <- sqldf("
+WITH ventas_producto_estado AS (
+    SELECT
+        bti.nombre_estado,
+        bt.id_producto,
+        COUNT(*) AS total_transacciones
+    FROM base_transacciones bt
+    JOIN base_tiendas bti
+        ON bt.id_tienda = bti.id_tienda
+    GROUP BY bti.nombre_estado, bt.id_producto
+),
+ranking_productos AS (
+    SELECT
+        nombre_estado,
+        id_producto,
+        total_transacciones,
+        ROW_NUMBER() OVER (
+            PARTITION BY nombre_estado
+            ORDER BY total_transacciones DESC, id_producto ASC
+        ) AS rn
+    FROM ventas_producto_estado
+)
+SELECT
+    nombre_estado,
+    id_producto,
+    total_transacciones
+FROM ranking_productos
+WHERE rn = 1
+ORDER BY nombre_estado
+")
+
+q7
+```
+
+# Consulta 8
+## Promedio de días entre lanzamiento del producto y su primera venta
+
+```{r q8}
+q8 <- sqldf("
+WITH primera_venta_producto AS (
+    SELECT
+        bt.id_producto,
+        MIN(bt.fecha_compra) AS primera_fecha_venta
+    FROM base_transacciones bt
+    GROUP BY bt.id_producto
+)
+SELECT
+    AVG(julianday(pvp.primera_fecha_venta) - julianday(bp.fecha_lanzamiento)) AS promedio_dias
+FROM primera_venta_producto pvp
+JOIN base_productos bp
+    ON pvp.id_producto = bp.id_producto
+")
+
+q8
+```
+
+# Consulta 9
+## Top 3 días con más transacciones
+
+```{r q9}
+q9 <- sqldf("
+SELECT
+    bt.fecha_compra,
+    COUNT(*) AS total_transacciones
+FROM base_transacciones bt
+GROUP BY bt.fecha_compra
+ORDER BY total_transacciones DESC, bt.fecha_compra ASC
+LIMIT 3
+")
+
+q9
+```
+
+# Consulta 10
+## Producto con mayor caída de ventas mes a mes
+
+```{r q10}
+q10 <- sqldf("
+WITH ventas_mensuales AS (
+    SELECT
+        bt.id_producto,
+        strftime('%Y-%m', bt.fecha_compra) AS year_mes,
+        COUNT(*) AS total_ventas
+    FROM base_transacciones bt
+    GROUP BY bt.id_producto, strftime('%Y-%m', bt.fecha_compra)
+),
+caida_mensual AS (
+    SELECT
+        id_producto,
+        year_mes,
+        total_ventas,
+        total_ventas - LAG(total_ventas) OVER (
+            PARTITION BY id_producto
+            ORDER BY year_mes
+        ) AS diferencia_vs_mes_anterior
+    FROM ventas_mensuales
+)
+SELECT
+    id_producto,
+    year_mes,
+    total_ventas,
+    diferencia_vs_mes_anterior
+FROM caida_mensual
+WHERE diferencia_vs_mes_anterior IS NOT NULL
+ORDER BY diferencia_vs_mes_anterior ASC
+LIMIT 1
+")
+
+q10
+```
+
+```{r}
+write.csv(q1, "q1_ventas_por_estado.csv", row.names = FALSE)
+write.csv(q2, "q2_top5_productos.csv", row.names = FALSE)
+write.csv(q3, "q3_precio_promedio_producto.csv", row.names = FALSE)
+write.csv(q4, "q4_ultima_fecha_por_tienda.csv", row.names = FALSE)
+write.csv(q5, "q5_productos_no_vendidos_por_estado.csv", row.names = FALSE)
+write.csv(q6, "q6_tiendas_sobre_promedio.csv", row.names = FALSE)
+write.csv(q7, "q7_producto_top_por_estado.csv", row.names = FALSE)
+write.csv(q8, "q8_promedio_dias_primera_venta.csv", row.names = FALSE)
+write.csv(q9, "q9_top3_dias.csv", row.names = FALSE)
+write.csv(q10, "q10_mayor_caida_mensual.csv", row.names = FALSE)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

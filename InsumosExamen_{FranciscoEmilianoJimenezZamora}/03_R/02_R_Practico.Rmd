@@ -1,0 +1,112 @@
+---
+title: "Examen Tecnico - R"
+output: html_notebook
+---
+
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(forecast)
+library(readr)
+```
+
+
+
+### Lectura de datos
+
+
+
+```{r read_data}
+base_transacciones <- read_delim(
+  "C:/Users/Emiliano/Desktop/InsumosExamen/base_transacciones.txt",
+  delim = "|",
+  show_col_types = FALSE,
+  trim_ws = TRUE
+)
+
+str(base_transacciones)
+head(base_transacciones)
+```
+# Procesamiento de dartos
+
+
+```{r}
+transacciones_dia_producto <- base_transacciones %>% # Calcula el total de transacciones (n) por cada combinación de fecha y producto.
+  group_by(fecha_compra, id_producto) %>%
+  summarise(total_transacciones = n(), .groups = "drop") %>%
+  arrange(fecha_compra, id_producto)
+
+# Mostramos el resultado del procesamiento
+head(transacciones_dia_producto, 10)
+```
+
+# Prónostico global
+
+
+```{r pronostico_global}
+
+serie_global <- base_transacciones %>%
+  group_by(fecha_compra) %>%
+  summarise(total_transacciones = n(), .groups = "drop") %>%
+  arrange(fecha_compra)
+
+str(serie_global)
+head(serie_global)
+
+#  Empezamos el modelado
+ts_global <- ts(serie_global$total_transacciones, frequency = 7) # La serie se deifine con frecuencia 7 (semanal).
+modelo_global <- auto.arima(ts_global)
+
+# El pronóstico y la visualización
+pronostico_global <- forecast(modelo_global, h = 7)
+print(pronostico_global)#Tabla.
+
+autoplot(pronostico_global) +
+  labs(title = "Pronóstico Global: Próximos 7 días",
+       subtitle = "Modelo Auto-ARIMA con estacionalidad semanal",
+       y = "Transacciones", 
+       x = "Tiempo (Semanas)") +
+  theme_minimal()
+```
+
+
+
+# Prónostico por producto
+
+
+
+
+```{r}
+# Selccione un producto específico para demostrar la capacidad de granularidad del modelo.
+
+producto_id <- "P001"
+serie_producto <- transacciones_dia_producto %>%
+  filter(id_producto == producto_id)
+
+ts_prod <- ts(serie_producto$total_transacciones, frequency = 7)
+modelo_prod <- auto.arima(ts_prod)
+pronostico_prod <- forecast(modelo_prod, h = 7)
+
+autoplot(pronostico_prod) +
+  labs(title = paste("Pronóstico Específico - Producto:", producto_id),
+       y = "Transacciones", x = "Semanas") +
+  theme_light()
+
+```
+# Exportación
+
+
+```{r}
+
+#Base agrupada en el ejercicio.
+write_csv(transacciones_dia_producto, "03_transacciones_agrupadas.csv")
+
+# Resultados del pronóstico (adjuntar como evidencia)
+pronostico_tabla <- as.data.frame(pronostico_global)
+write_csv(pronostico_tabla, "04_pronostico_semanal_global.csv")
+
+message("Proceso completado. Los archivos se han guardado en: ", getwd())
+```
+

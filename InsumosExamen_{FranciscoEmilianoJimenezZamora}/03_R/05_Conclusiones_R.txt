@@ -1,0 +1,8 @@
+Se realizó un análisis estadístico avanzado utilizando tidyverse (dplyr, ggplot2, lubridate) para la manipulación y visualización de datos.
+El procesamiento permitió estructurar la información a nivel diario y por producto, estableciendo una base sólida para un análisis de series de tiempo. 
+La aplicación de modelos como Auto-ARIMA mediante la librería forecast, garantizó la generación de pronósticos de alta precisión, capturando eficazmente 
+la estacionalidad semanal y las tendencias de venta.
+
+Este flujo de trabajo, documentado en un entorno de R Notebook, asegura la reproducibilidad del análisis y proporciona una visión clara del comportamiento 
+futuro de las transacciones mediante intervalos de confianza. Las visualizaciones profesionales y las tablas de resultados generadas permiten una interpretación 
+de los datos, demostrando la capacidad de transformar registros a información para la planeación y toma de decisiones basada en datos.

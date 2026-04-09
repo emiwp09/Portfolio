@@ -1,0 +1,17 @@
+
+CONCLUSIONES DEL ANÁLISIS - TITANIC
+
+TRATAMIENTO DE DATOS:
+- Se eliminaron duplicados y las columnas 'deck' (por tener 77% de nulos) y 'alive' (redundante).
+- Se imputó la edad con la mediana y el puerto de embarque con la moda para asegurar una base completa.
+
+HALLAZGOS ESTADÍSTICOS:
+- La tasa de supervivencia general fue del 41.20%.
+- Las mujeres y los pasajeros de primera clase presentan las mayores probabilidades de supervivencia.
+
+ANÁLISIS DE CORRELACIÓN:
+- La matriz de Spearman confirma que el género ('sex') es el predictor más influyente en el modelo.
+- Existe una correlación negativa fuerte en la variable 'adult_male', validando la prioridad de evacuación.
+
+METODOLOGÍA:
+- El uso de Python y sus librerías (Pandas, Seaborn) permitió transformar datos crudos en información accionable de manera eficiente.
