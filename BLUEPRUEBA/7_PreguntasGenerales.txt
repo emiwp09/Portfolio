@@ -1,0 +1,59 @@
+CUESTIONARIO GENERAL - BLUETAB
+
+1. Establece con tus propias palabras, algunas buenas prácticas y funciones recomendadas para optimizar operaciones de lectura, escritura y manipulación en Spark/PySpark
+
+- Usar particionamiento adecuado: evitar shuffle innecesario usando repartition() o coalesce() según el caso. repartition() aumenta  particiones, 
+  coalesce() las reduce sin shuffle completo.
+
+- Usar cache() o persist() en DataFrames que se reutilizan múltiples veces para evitar recalcular transformaciones costosas.
+
+- Preferir funciones nativas de Spark (pyspark.sql.functions) sobre UDFs de Python, ya que las UDFs rompen la optimización del Catalyst optimizer y 
+  son significativamente más lentas.
+
+- Para escritura, usar formato Parquet en lugar de CSV: es columnar, comprimido y permite partition pruning en lecturas posteriores.
+
+- Evitar collect() en DataFrames grandes ya que trae todos los datos al driver y puede causar OutOfMemoryError. Usar take() o show()  para inspección.
+
+- Definir el schema explícitamente al leer datos en lugar de usar
+  inferSchema=True, que requiere un scan completo del archivo.
+
+2. Indica las pruebas estadísticas que has utilizado como parte del desarrollo de una solución de ciencia de datos. 
+
+Como parte del desarrollo de soluciones de ciencia de datos, he utilizado distintas pruebas estadísticas dependiendo del tipo de problema, la naturaleza de las 
+variables y el objetivo del análisis. En general, estas pruebas las he empleado para comparar grupos, validar supuestos, explorar relaciones entre variables y apoyar la interpretación de resultados.
+
+Algunas de las pruebas y enfoques estadísticos más relevantes que he utilizado son:
+
+- Prueba t de Student: para comparar medias entre dos grupos cuando se busca identificar diferencias estadísticamente significativas.
+- ANOVA: para comparar medias entre más de dos grupos.
+- Chi-cuadrada de independencia: para evaluar asociación entre variables categóricas.
+- Correlación de Pearson: para analizar relaciones lineales entre variables numéricas.
+- Correlación de Spearman: para evaluar relaciones monotónicas cuando no se asume normalidad o linealidad.
+- Pruebas de normalidad, como Shapiro-Wilk: para revisar si una variable sigue aproximadamente una distribución normal.
+- ruebas no paramétricas, como Mann-Whitney o Kruskal-Wallis: cuando los datos no cumplen supuestos de normalidad.
+- Intervalos de confianza y análisis descriptivo inferencial: para complementar la interpretación de métricas o diferencias observadas.
+
+En proyectos de modelado, además de las pruebas estadísticas clásicas, también he utilizado métricas de evaluación y validación como validación cruzada, análisis de correlación,
+ matrices de confusión, ROC-AUC, F1-score, RMSE y R², dependiendo de si el problema es de clasificación o regresión.
+
+En el contexto de mi tesis, por ejemplo, este tipo de herramientas ha sido útil para analizar diferencias entre grupos clínicos, explorar asociaciones entre variables demográficas y microbioma,
+y evaluar el comportamiento de variables previas al entrenamiento de modelos predictivos.
+
+3. En el contexto de Machine Learning y Ciencia de datos, explica:
+
+a) No Free Lunch Theorem:
+
+No existe un algoritmo de machine learning que sea el mejor para todos los problemas posibles. Todo modelo que funciona bien en un tipo de problema lo hace a costa de peor desempeño
+en otro. Esto implica que siempre hay que experimentar con varios modelos y evaluar cuál funciona mejor para el problema específico, en lugar de asumir que un modelo es universalmente
+superior. En esta prueba, por ejemplo, XGBoost superó a la regresión lineal/logística, pero en un dataset diferente el resultado podría ser distinto.
+
+b) Occam's Razor:
+Ante dos modelos con desempeño similar, se debe preferir el más simple. En ciencia de datos esto se traduce en evitar modelos innecesariamente complejos que puedan sobreajustarse
+(overfitting) a los datos de entrenamiento. Por ejemplo, si una regresión logística da resultados similares a una red neuronal profunda, es preferible usar la regresión logística
+por su mayor interpretabilidad y menor riesgo de overfitting.
+
+c) Data Leakage:
+Ocurre cuando información que no estaría disponible en producción al momento de hacer la predicción se filtra al
+modelo durante el entrenamiento, generando métricas artificialmente infladas que no se replican en producción.
+En esta prueba, el principal riesgo de leakage fue en el prblema A: predecir PAY_AMT4 (junio) usando variables de meses posteriores como BILL_AMT1 (septiembre) hubiera
+constituido leakage, ya que en un escenario real no tendríamos esa información al momento de predecir.
